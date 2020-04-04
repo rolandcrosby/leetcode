@@ -1,3 +1,4 @@
+# 53. Maximum Subarray
 # Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 #
 # Example:
@@ -34,13 +35,13 @@ class DivideSolution:
         right = nums[pivot:]
         bestLeft = self.maxSubArray(left)
         bestRight = self.maxSubArray(right)
-        bestLeftSuffix = 0
+        bestLeftSuffix = nums[pivot-1]
         leftSuffixSum = 0
         for start in range(pivot - 1, -1, -1):
             leftSuffixSum += nums[start]
             if leftSuffixSum > bestLeftSuffix:
                 bestLeftSuffix = leftSuffixSum
-        bestRightPrefix = 0
+        bestRightPrefix = nums[pivot]
         rightPrefixSum = 0
         for end in range(len(nums) - pivot):
             rightPrefixSum += nums[pivot + end]
