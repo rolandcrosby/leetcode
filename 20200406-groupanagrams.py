@@ -16,7 +16,7 @@
 # The order of your output does not matter.
 
 from typing import List, FrozenSet
-
+import testlib
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
@@ -31,17 +31,17 @@ if __name__ == "__main__":
     testdata = [
         (
             ["eat", "tea", "tan", "ate", "nat", "bat"],
-            [
-                ["ate", "eat", "tea"],
-                ["nat", "tan"],
-                ["bat"]
-            ]
+            [["ate", "eat", "tea"], ["nat", "tan"], ["bat"]],
         )
     ]
+
     def to_set(ans: List[List[str]]) -> FrozenSet[FrozenSet[str]]:
         return frozenset([frozenset(s) for s in ans])
-    passed = 0
-    for tc in testdata:
-        assert to_set(Solution().groupAnagrams(tc[0])) == to_set(tc[1])
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+
+    testlib.run(
+        lambda t, tc: t.assertEqual(
+            to_set(Solution().groupAnagrams(tc[0])), to_set(tc[1]), tc
+        ),
+        testdata,
+    )
+

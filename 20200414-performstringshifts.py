@@ -33,22 +33,25 @@
 #   - 0 <= shift[i][1] <= 100
 
 from typing import List
+import testlib
 
 
 class Solution:
     def stringShift(self, s: str, shift: List[List[int]]) -> str:
-        total_right_shift = sum([(count if direction == 1 else -count)
-                                 for (direction, count) in shift]) % len(s)
+        total_right_shift = sum(
+            [(count if direction == 1 else -count) for (direction, count) in shift]
+        ) % len(s)
         return s[-total_right_shift:] + s[:-total_right_shift]
 
 
 if __name__ == "__main__":
     testdata = [
         ("abc", [[0, 1], [1, 2]], "cab"),
-        ("abcdefg", [[1, 1], [1, 1], [0, 2], [1, 3]], "efgabcd")
+        ("abcdefg", [[1, 1], [1, 1], [0, 2], [1, 3]], "efgabcd"),
     ]
-    passed = 0
-    for tc in testdata:
-        assert Solution().stringShift(tc[0], tc[1]) == tc[2]
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+    testlib.run(
+        lambda t, tc: t.assertEqual(
+            Solution().stringShift(tc[0], tc[1]), tc[2], repr(tc)
+        ),
+        testdata,
+    )

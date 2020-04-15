@@ -21,6 +21,7 @@
 # 1 <= stones[i] <= 1000
 from typing import List
 from bisect import insort
+import testlib
 
 
 class Solution:
@@ -39,11 +40,8 @@ class Solution:
 
 
 if __name__ == "__main__":
-    testdata = [
-        ([2, 7, 4, 1, 8, 1], 1)
-    ]
-    passed = 0
-    for tc in testdata:
-        assert Solution().lastStoneWeight(tc[0]) == tc[1]
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+    testdata = [([2, 7, 4, 1, 8, 1], 1)]
+    testlib.run(
+        lambda t, tc: t.assertEqual(Solution().lastStoneWeight(tc[0]), tc[1], tc),
+        testdata,
+    )

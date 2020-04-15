@@ -14,6 +14,7 @@
 # Note: The length of path between two nodes is represented by the number of edges between them.
 
 from typing import List, Optional
+import testlib
 
 
 class TreeNode:
@@ -52,17 +53,15 @@ class Solution:
                 depth_r = 1 + rds[0]
                 prev_max = max(prev_max, rds[1])
             return (max(depth_l, depth_r), max(depth_l + depth_r, prev_max))
+
         return depths(root)[1]
 
-            
 
 if __name__ == "__main__":
-    testdata = [
-        ([1, [2, [4, None, None], [5, None, None]], [3, None, None]], 3)
-    ]
-    passed = 0
-    for tc in testdata:
-        assert Solution().diameterOfBinaryTree(
-            TreeNode.from_list(tc[0])) == tc[1]
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+    testdata = [([1, [2, [4, None, None], [5, None, None]], [3, None, None]], 3)]
+    testlib.run(
+        lambda t, tc: t.assertEqual(
+            Solution().diameterOfBinaryTree(TreeNode.from_list(tc[0])), tc[1], tc
+        ),
+        testdata
+    )

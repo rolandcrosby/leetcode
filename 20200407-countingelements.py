@@ -29,12 +29,13 @@
 # 0 <= arr[i] <= 1000
 
 from typing import List
+import testlib
 
 
 class Solution:
     def countElements(self, arr: List[int]) -> int:
         values = set(arr)
-        return sum([1 for el in arr if el+1 in values])
+        return sum([1 for el in arr if el + 1 in values])
 
 
 if __name__ == "__main__":
@@ -42,10 +43,10 @@ if __name__ == "__main__":
         ([1, 2, 3], 2),
         ([1, 1, 3, 3, 5, 5, 7, 7], 0),
         ([1, 3, 2, 3, 5, 0], 3),
-        ([1, 1, 2, 2], 2)
+        ([1, 1, 2, 2], 2),
     ]
-    passed = 0
-    for tc in testdata:
-        assert Solution().countElements(tc[0]) == tc[1]
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+    testlib.run(
+        lambda t, tc: t.assertEqual(Solution().countElements(tc[0]), tc[1], tc),
+        testdata,
+    )
+

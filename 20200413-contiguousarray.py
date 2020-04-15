@@ -15,6 +15,7 @@
 
 
 from typing import List
+import testlib
 
 
 class Solution:
@@ -40,10 +41,9 @@ if __name__ == "__main__":
         ([0, 1, 0], 2),
         ([0, 1, 0, 1], 4),
         ([0, 0, 0, 1, 0, 1], 4),
-        ([0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1], 10)
+        ([0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1], 10),
     ]
-    passed = 0
-    for tc in testdata:
-        assert Solution().findMaxLength(tc[0]) == tc[1]
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+    testlib.run(
+        lambda t, tc: t.assertEqual(Solution().findMaxLength(tc[0]), tc[1], repr(tc)),
+        testdata,
+    )

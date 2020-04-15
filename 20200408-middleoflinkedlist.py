@@ -19,6 +19,8 @@
 # The number of nodes in the given list will be between 1 and 100.
 
 from typing import List
+import testlib
+
 
 class ListNode:
     def __init__(self, x):
@@ -29,10 +31,10 @@ class ListNode:
         return "(%s, %s)" % (repr(self.val), repr(self.next))
 
     @staticmethod
-    def fromList(l: List) -> 'ListNode':
+    def fromList(l: List) -> "ListNode":
         nodes = [ListNode(el) for el in l]
         for i in range(len(nodes) - 1):
-            nodes[i].next = nodes[i+1]
+            nodes[i].next = nodes[i + 1]
         return nodes[0]
 
 
@@ -50,13 +52,11 @@ class Solution:
 
 
 if __name__ == "__main__":
-    testdata = [
-        ([1, 2, 3, 4, 5], 3),
-        ([1, 2, 3, 4, 5, 6], 4)
-    ]
-    passed = 0
-    for tc in testdata:
-        ll = ListNode.fromList(tc[0])
-        assert(Solution().middleNode(ll).val == tc[1])
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+    testdata = [([1, 2, 3, 4, 5], 3), ([1, 2, 3, 4, 5, 6], 4)]
+
+    testlib.run(
+        lambda t, tc: t.assertEqual(
+            Solution().middleNode(ListNode.fromList(tc[0])).val, tc[1], tc
+        ),
+        testdata,
+    )

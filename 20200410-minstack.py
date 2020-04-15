@@ -18,6 +18,7 @@
 # minStack.top();      --> Returns 0.
 # minStack.getMin();   --> Returns -2.
 
+import testlib
 
 class MinStack:
 
@@ -45,18 +46,14 @@ class MinStack:
 
 
 if __name__ == "__main__":
-    def example_test():
+    def example_test(t):
         min_stack = MinStack()
         min_stack.push(-2)
         min_stack.push(0)
         min_stack.push(-3)
-        assert min_stack.getMin() == -3
+        t.assertEqual(min_stack.getMin(), -3)
         min_stack.pop()
-        assert min_stack.top() == 0
-        assert min_stack.getMin() == -2
+        t.assertEqual(min_stack.top(), 0)
+        t.assertEqual(min_stack.getMin(), -2)
     tests = [example_test]
-    passed = 0
-    for test in tests:
-        test()
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(tests)))
+    testlib.run(lambda t, tc: tc(t), tests)

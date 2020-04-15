@@ -25,6 +25,7 @@
 # Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 from typing import List
+import testlib
 
 
 class Solution:
@@ -32,8 +33,8 @@ class Solution:
         profit = 0
         for day in range(len(prices) - 1):
             day += 1
-            if prices[day] > prices[day-1]:
-                profit += prices[day] - prices[day-1]
+            if prices[day] > prices[day - 1]:
+                profit += prices[day] - prices[day - 1]
         return profit
 
 
@@ -43,10 +44,9 @@ if __name__ == "__main__":
         ([1, 2, 3, 4, 5], 4),
         ([7, 6, 4, 3, 1], 0),
         ([1, 2], 1),
-        ([1, 9, 6, 9, 1, 7, 1, 1, 5, 9, 9, 9], 25)
+        ([1, 9, 6, 9, 1, 7, 1, 1, 5, 9, 9, 9], 25),
     ]
-    passed = 0
-    for tc in testdata:
-        assert Solution().maxProfit(tc[0]) == tc[1]
-        passed += 1
-    print("%d of %d tests passed" % (passed, len(testdata)))
+    testlib.run(
+        lambda t, tc: t.assertEqual(Solution().maxProfit(tc[0]), tc[1], tc), testdata
+    )
+
