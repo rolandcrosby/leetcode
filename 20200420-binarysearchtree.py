@@ -14,22 +14,6 @@
 # - 1 <= preorder.length <= 100
 # - The values of preorder are distinct.
 
-# 8 5 1 7 10 12
-# [(8 _ _)] 5 1 7 10 12
-# 5 < 8
-# [(8 (5 _ _) _) (5 _ _)] 1 7 10 12 
-# 1 < 5
-# [(8 (5 (1 _ _) _) _) (5 (1 _ _) _) (1 _ _)] 7 10 12 
-# 7 > 1
-# 7 > 5
-# 7 < 8
-# [(8 (5 (1 _ _) (7 _ _)) _) (5 (1 _ _) (7 _ _)) (7 _ _)] 10 12 
-# 10 > 7
-# 10 > 5
-# 10 > 8
-# [(8 (5 (1 _ _) (7 _ _) (10 _ _)) (10 _ _)] 12 
-# [(8 (5 (1 _ _) (7 _ _) (10 _ _)) (10 _ (12 _ _))]
-
 
 from typing import List
 from datastructures import TreeNode
@@ -50,10 +34,31 @@ class Solution:
                 else:
                     root.right = add(root.right, new)
             return root
+
         root = TreeNode(preorder[0])
         for child in preorder[1:]:
             node = TreeNode(child)
             root = add(root, node)
+        return root
+
+
+class BetterSolution:
+    # Thanks to https://github.com/collares for explaining the logic here
+    def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+        root = TreeNode(preorder[0])
+        current = root
+        left_nodes = []  # nodes from which we descended to the left
+        for val in preorder[1:]:
+            node = TreeNode(val)
+            if val < current.val:
+                left_nodes.append(current)
+                current.left = node
+                current = current.left
+            else:
+                while len(left_nodes) > 0 and left_nodes[-1].val < val:
+                    current = left_nodes.pop(-1)
+                current.right = node
+                current = current.right
         return root
 
 
@@ -68,7 +73,10 @@ if __name__ == "__main__":
         ([8, 5, 10], TreeNode.from_list([8, [5, None, None], [10, None, None]])),
         ([8], TreeNode.from_list([8, None, None])),
         ([8, 10], TreeNode.from_list([8, None, [10, None, None]])),
-        ([8, 5, 1, 7], TreeNode.from_list([8, [5, [1, None, None], [7, None, None]], None])),
+        (
+            [8, 5, 1, 7],
+            TreeNode.from_list([8, [5, [1, None, None], [7, None, None]], None]),
+        ),
     ]
     testlib.run(
         lambda t, tc: t.assertEqual(Solution().bstFromPreorder(tc[0]), tc[1], tc),
