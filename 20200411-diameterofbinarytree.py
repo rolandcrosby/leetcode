@@ -14,26 +14,8 @@
 # Note: The length of path between two nodes is represented by the number of edges between them.
 
 from typing import List, Optional
+from datastructures import TreeNode
 import testlib
-
-
-class TreeNode:
-    def __init__(self, x: int):
-        self.val = x
-        self.left = None
-        self.right = None
-
-    def __repr__(self):
-        return "(%s, %s, %s)" % (repr(self.val), repr(self.left), repr(self.right))
-
-    @staticmethod
-    def from_list(ls: List[Optional[int]]):
-        if ls is None:
-            return None
-        n = TreeNode(ls[0])
-        n.left = TreeNode.from_list(ls[1])
-        n.right = TreeNode.from_list(ls[2])
-        return n
 
 
 class Solution:
@@ -63,5 +45,5 @@ if __name__ == "__main__":
         lambda t, tc: t.assertEqual(
             Solution().diameterOfBinaryTree(TreeNode.from_list(tc[0])), tc[1], tc
         ),
-        testdata
+        testdata,
     )
