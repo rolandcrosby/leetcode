@@ -28,6 +28,41 @@ import testlib
 from collections import OrderedDict
 from typing import List, Tuple, Optional
 
+class MyOrderedDict():
+    def __init__(self):
+        self._nodes = {}
+        self._order = []
+    
+    def __contains__(self, key):
+        return key in self._nodes
+    
+    def __getitem__(self, key):
+        if not key in self:
+            raise KeyError("invalid key: {}".format(key))
+        self.move_to_end(key)
+        return self._nodes[key]
+    
+    def __setitem__(self, key, value):
+        if key not in self._nodes:
+            self._order.append(key)
+        self._nodes[key] = value
+
+    def move_to_end(self, key):
+        if not key in self:
+            raise KeyError("invalid key: {}".format(key))
+        self._order.pop(self._order.index(key))
+        self._order.append(key)
+    
+    def popitem(self, last=False):
+        if len(self._order) == 0:
+            raise KeyError("empty dict")
+        if last:
+            idx = self._order.pop(-1)
+        else:
+            idx = self._order.pop(0)
+        item = self._nodes[idx]
+        del self._nodes[idx]
+        return item
 
 class LRUCache:
     def __init__(self, capacity: int):
