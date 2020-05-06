@@ -37,4 +37,3 @@ if __name__ == "__main__":
         lambda t, tc: t.assertEqual(Solution().firstUniqChar(tc[0]), tc[1], tc),
         testdata,
     )
-
