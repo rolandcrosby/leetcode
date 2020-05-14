@@ -1,11 +1,15 @@
 import unittest
 
-from typing import List, Callable, Tuple, TypeVar, Iterable
+from typing import Callable, TypeVar, Iterable
+
 
 class TestLeetcode(unittest.TestCase):
     pass
 
-T = TypeVar('T')
+
+T = TypeVar("T")
+
+
 def run(fn: Callable[[unittest.TestCase, T], bool], testdata: Iterable[T]):
     def runTest(self):
         passed = 0
@@ -13,5 +17,6 @@ def run(fn: Callable[[unittest.TestCase, T], bool], testdata: Iterable[T]):
             fn(self, el)
             passed += 1
         print("%d of %d tests passed" % (passed, len(testdata)))
+
     TestLeetcode.runTest = runTest
-    unittest.main('testlib')
+    unittest.main("testlib")

@@ -1,9 +1,11 @@
 # Search in Rotated Sorted Array
 #
-# Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+# Suppose an array sorted in ascending order is rotated at some pivot unknown to you
+# beforehand.
 # (i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).
 #
-# You are given a target value to search. If found in the array return its index, otherwise return -1.
+# You are given a target value to search. If found in the array return its index,
+# otherwise return -1.
 #
 # You may assume no duplicate exists in the array.
 #
@@ -17,11 +19,11 @@
 # Input: nums = [4,5,6,7,0,1,2], target = 3
 # Output: -1
 import testlib
-from typing import List, Optional, Tuple
+from typing import List
 
 
 class Solution:
-    def __init__(self, debug: bool=False):
+    def __init__(self, debug: bool = False):
         self.debug = debug
 
     def search(self, nums: List[int], target: int) -> int:
@@ -70,19 +72,24 @@ class Solution:
     def _cmp(self, x, y):
         return (x > y) - (x < y)
 
-    def _debug_input(self, nums: List[int], target: int, width: int=4):
+    def _debug_input(self, nums: List[int], target: int, width: int = 4):
         fmt = "{{:>{}}}".format(width)
         print(
-            "".join([fmt.format(n) for n in nums])
-            + ", looking for {}".format(target)
+            "".join([fmt.format(n) for n in nums]) + ", looking for {}".format(target)
         )
 
-    def _debug_iteration(self, nums: List[int], target: int, start: int, guess: int, end: int, width: int=4):
+    def _debug_iteration(
+        self,
+        nums: List[int],
+        target: int,
+        start: int,
+        guess: int,
+        end: int,
+        width: int = 4,
+    ):
         fmt = "{{:>{}}}".format(width)
         pointers = [
-            "^"
-            if n == guess
-            else ("[" if n == start else ("]" if n == end else ""))
+            "^" if n == guess else ("[" if n == start else ("]" if n == end else ""))
             for n in range(len(nums))
         ]
         comparisons = [
@@ -193,5 +200,6 @@ if __name__ == "__main__":
         ),
     ]
     testlib.run(
-        lambda t, tc: t.assertEqual(Solution(True).search(tc[0], tc[1]), tc[2]), testdata
+        lambda t, tc: t.assertEqual(Solution(True).search(tc[0], tc[1]), tc[2]),
+        testdata,
     )

@@ -1,6 +1,7 @@
 # Jump Game
 #
-# Given an array of non-negative integers, you are initially positioned at the first index of the array.
+# Given an array of non-negative integers, you are initially positioned at the first
+# index of the array.
 #
 # Each element in the array represents your maximum jump length at that position.
 #
@@ -14,7 +15,8 @@
 # Example 2:
 # Input: [3,2,1,0,4]
 # Output: false
-# Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+# Explanation: You will always arrive at index 3 no matter what. Its maximum jump length
+# is 0, which makes it impossible to reach the last index.
 
 import testlib
 from typing import List

@@ -1,7 +1,9 @@
 # Binary Tree Maximum Path Sum
 # Given a non-empty binary tree, find the maximum path sum.
 #
-# For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
+# For this problem, a path is defined as any sequence of nodes from some starting node
+# to any node in the tree along the parent-child connections. The path must contain at
+# least one node and does not need to go through the root.
 #
 # Example 1:
 # Input: [1,2,3]
@@ -39,22 +41,22 @@ class Solution:
             if node is None:
                 return (0, None)
             best_including = node.val
-            l = best_paths(node.left)
-            r = best_paths(node.right)
-            if l[0] > 0:
-                if r[0] > 0:
-                    best_including += max(l[0], r[0])
+            left = best_paths(node.left)
+            right = best_paths(node.right)
+            if left[0] > 0:
+                if right[0] > 0:
+                    best_including += max(left[0], right[0])
                 else:
-                    best_including += l[0]
-            elif r[0] > 0:
-                best_including += r[0]
+                    best_including += left[0]
+            elif right[0] > 0:
+                best_including += right[0]
             best_child = max(
                 [
                     n
                     for n in [
-                        l[1],
-                        r[1],
-                        node.val + sum([v for v in [l[0], r[0]] if v > 0]),
+                        left[1],
+                        right[1],
+                        node.val + sum([v for v in [left[0], right[0]] if v > 0]),
                     ]
                     if n is not None
                 ]

@@ -1,9 +1,13 @@
 # LRU Cache
 #
-# Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.
+# Design and implement a data structure for Least Recently Used (LRU) cache. It should
+# support the following operations: get and put.
 #
-# - get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
-# - put(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
+# - get(key) - Get the value (will always be positive) of the key if the key exists in
+# the cache, otherwise return -1.
+# - put(key, value) - Set or insert the value if the key is not already present. When
+# the cache reached its capacity, it should invalidate the least recently used item
+# before inserting a new item.
 #
 # The cache is initialized with a positive capacity.
 #
@@ -28,31 +32,32 @@ import testlib
 from collections import OrderedDict
 from typing import List, Tuple, Optional
 
-class MyOrderedDict():
+
+class MyOrderedDict:
     def __init__(self):
         self._nodes = {}
         self._order = []
-    
+
     def __contains__(self, key):
         return key in self._nodes
-    
+
     def __getitem__(self, key):
-        if not key in self:
+        if key not in self:
             raise KeyError("invalid key: {}".format(key))
         self.move_to_end(key)
         return self._nodes[key]
-    
+
     def __setitem__(self, key, value):
         if key not in self._nodes:
             self._order.append(key)
         self._nodes[key] = value
 
     def move_to_end(self, key):
-        if not key in self:
+        if key not in self:
             raise KeyError("invalid key: {}".format(key))
         self._order.pop(self._order.index(key))
         self._order.append(key)
-    
+
     def popitem(self, last=False):
         if len(self._order) == 0:
             raise KeyError("empty dict")
@@ -63,6 +68,7 @@ class MyOrderedDict():
         item = self._nodes[idx]
         del self._nodes[idx]
         return item
+
 
 class LRUCache:
     def __init__(self, capacity: int):

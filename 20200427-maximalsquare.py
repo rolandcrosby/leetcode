@@ -1,5 +1,6 @@
 # Maximal Square
-# Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+# Given a 2D binary matrix filled with 0's and 1's, find the largest square containing
+# only 1's and return its area.
 #
 # Example:
 # Input:
@@ -10,7 +11,7 @@
 # Output: 4
 
 import testlib
-from typing import List, TypeVar
+from typing import List
 
 
 class Solution:

@@ -18,6 +18,7 @@
 from typing import List, FrozenSet
 import testlib
 
+
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         out = {}
@@ -44,4 +45,3 @@ if __name__ == "__main__":
         ),
         testdata,
     )
-

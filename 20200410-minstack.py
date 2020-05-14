@@ -1,5 +1,6 @@
 # Min Stack
-# Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+# Design a stack that supports push, pop, top, and retrieving the minimum element in
+# constant time.
 #
 # push(x) -- Push element x onto stack.
 # pop() -- Removes the element on top of the stack.
@@ -20,8 +21,8 @@
 
 import testlib
 
-class MinStack:
 
+class MinStack:
     def __init__(self):
         self.stack = []
 
@@ -46,6 +47,7 @@ class MinStack:
 
 
 if __name__ == "__main__":
+
     def example_test(t):
         min_stack = MinStack()
         min_stack.push(-2)
@@ -55,5 +57,6 @@ if __name__ == "__main__":
         min_stack.pop()
         t.assertEqual(min_stack.top(), 0)
         t.assertEqual(min_stack.getMin(), -2)
+
     tests = [example_test]
     testlib.run(lambda t, tc: tc(t), tests)

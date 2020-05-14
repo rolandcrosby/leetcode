@@ -1,9 +1,15 @@
 # Flood Fill
-# An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0 to 65535).
+# An image is represented by a 2-D array of integers, each integer representing the
+# pixel value of the image (from 0 to 65535).
 #
-# Given a coordinate (sr, sc) representing the starting pixel (row and column) of the flood fill, and a pixel value newColor, "flood fill" the image.
+# Given a coordinate (sr, sc) representing the starting pixel (row and column) of the
+# flood fill, and a pixel value newColor, "flood fill" the image.
 #
-# To perform a "flood fill", consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color as the starting pixel), and so on. Replace the color of all of the aforementioned pixels with the newColor.
+# To perform a "flood fill", consider the starting pixel, plus any pixels connected
+# 4-directionally to the starting pixel of the same color as the starting pixel, plus
+# any pixels connected 4-directionally to those pixels (also with the same color as the
+# starting pixel), and so on. Replace the color of all of the aforementioned pixels
+# with the newColor.
 #
 # At the end, return the modified image.
 #
@@ -20,8 +26,10 @@
 #
 # Note:
 # - The length of image and image[0] will be in the range [1, 50].
-# - The given starting pixel will satisfy 0 <= sr < image.length and 0 <= sc < image[0].length.
-# - The value of each color in image[i][j] and newColor will be an integer in [0, 65535].
+# - The given starting pixel will satisfy 0 <= sr < image.length
+#   and 0 <= sc < image[0].length.
+# - The value of each color in image[i][j] and newColor will be an integer
+#   in [0, 65535].
 
 from typing import List, Tuple
 import testlib
@@ -34,9 +42,19 @@ class Solution:
         rows = len(image)
         cols = len(image[0])
         done = set()
+
         def neighbors(r: int, c: int) -> List[Tuple[int, int]]:
-            pts = [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]
-            return [(ri, ci) for (ri, ci) in pts if ri >= 0 and ci >= 0 and ri < rows and ci < cols and (ri, ci) not in done]
+            pts = [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]
+            return [
+                (ri, ci)
+                for (ri, ci) in pts
+                if ri >= 0
+                and ci >= 0
+                and ri < rows
+                and ci < cols
+                and (ri, ci) not in done
+            ]
+
         orig_color = image[sr][sc]
         todo = [(sr, sc)]
         while len(todo) > 0:
@@ -48,11 +66,10 @@ class Solution:
         return image
 
 
-
 if __name__ == "__main__":
     testdata = [
         ([[1, 1, 1], [1, 1, 0], [1, 0, 1]], 1, 1, 2, [[2, 2, 2], [2, 2, 0], [2, 0, 1]]),
-        ([[0, 0, 0], [0, 1, 1]], 1, 1, 1, [[0, 0, 0], [0, 1, 1]])
+        ([[0, 0, 0], [0, 1, 1]], 1, 1, 1, [[0, 0, 0], [0, 1, 1]]),
     ]
     testlib.run(
         lambda t, tc: t.assertEqual(
@@ -60,4 +77,3 @@ if __name__ == "__main__":
         ),
         testdata,
     )
-

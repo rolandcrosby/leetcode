@@ -1,5 +1,6 @@
 # Middle of the Linked List
-# Given a non-empty, singly linked list with head node head, return a middle node of linked list.
+# Given a non-empty, singly linked list with head node head, return a middle node of
+# linked list.
 #
 # If there are two middle nodes, return the second middle node.
 #
@@ -31,8 +32,8 @@ class ListNode:
         return "(%s, %s)" % (repr(self.val), repr(self.next))
 
     @staticmethod
-    def fromList(l: List) -> "ListNode":
-        nodes = [ListNode(el) for el in l]
+    def fromList(input: List) -> "ListNode":
+        nodes = [ListNode(el) for el in input]
         for i in range(len(nodes) - 1):
             nodes[i].next = nodes[i + 1]
         return nodes[0]

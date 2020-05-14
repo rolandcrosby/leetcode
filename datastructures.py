@@ -20,14 +20,14 @@ class TreeNode:
 
     def __repr__(self):
         if self.left is None:
-            l = "_"
+            left = "_"
         else:
-            l = repr(self.left)
+            left = repr(self.left)
         if self.right is None:
-            r = "_"
+            right = "_"
         else:
-            r = repr(self.right)
-        return "(%s %s %s)" % (repr(self.val), l, r)
+            right = repr(self.right)
+        return "(%s %s %s)" % (repr(self.val), left, right)
 
     @staticmethod
     def from_list(ls: ListNode):
