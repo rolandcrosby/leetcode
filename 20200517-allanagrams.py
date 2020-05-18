@@ -53,8 +53,6 @@ class Solution:
         return found
 
 
-
-
 if __name__ == "__main__":
     testdata = [
         ("abab", "ab", [0, 1, 2]),
